@@ -2,7 +2,8 @@ import mongoose from "mongoose";
 
 export const connectDB = async () : Promise<void> => {
   try {
-   const mongoURI = process.env['MONG0DB_URI'] || "mongodb://localhost:27017/mydatabase";
+   const mongoURI = process.env['MONGODB_URI'] || "mongodb://localhost:27017/mydatabase";
+
 
    if(!mongoURI) {
     throw new Error("MongoDB connection string is not defined in environment variables");
@@ -27,4 +28,4 @@ export const disconnectDB = async () : Promise<void> => {
     } catch (error) {
         throw new Error(`Failed to disconnect from MongoDB: ${error}`);
     }
-}
+};

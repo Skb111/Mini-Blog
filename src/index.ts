@@ -17,11 +17,11 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 app.use(morgan('dev'));
-const PORT = 8080;
+const PORT = process.env['PORT'];
 
-// app.get('/', (req, res) => {
-//   res.status(200).json({message: "Hello, Mini Blog!"});
-// });
+app.get('/', (req, res) => {
+  res.status(200).json({message: "Hello, Mini Blog!"});
+});
 
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 

@@ -9,7 +9,7 @@ const options: swaggerJSDoc.Options = {
             version: '1.0.0',
             description: 'API documentation for the Mini Blog application',
         },
-        servers: [{url: 'http://localhost:3000'}],
+        servers: [{url: 'http://localhost:8080'}],
         components:{
             securitySchemes:{
                 bearerAuth:{

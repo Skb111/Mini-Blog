@@ -6,6 +6,7 @@ import authRoutes from './routes/authRoutes';
 import { connectDB } from './config/database';
 import morgan from 'morgan';  
 import cors from 'cors';
+import blogRoutes from './routes/blogRoutes';
 
 dotenv.config();
 dotenv.config();
@@ -26,6 +27,7 @@ app.get('/', (req, res) => {
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 app.use("/api/auth", authRoutes);
+app.use("api/blogs", blogRoutes)
 
 app.listen(PORT, () => {
   console.log(`Server is running at http://localhost:${PORT}`);

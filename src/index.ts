@@ -26,7 +26,7 @@ app.get('/', (req, res) => {
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 app.use("/api/auth", authRoutes);
-app.use("/api/blogs", blogRoutes)
+app.use("/api/blog", blogRoutes)
 
 app.listen(PORT, () => {
   console.log(`Server is running at http://localhost:${PORT}`);

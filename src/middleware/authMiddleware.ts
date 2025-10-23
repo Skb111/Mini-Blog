@@ -7,11 +7,12 @@ export interface AuthRequest extends Request {
 
 export function requireAuth(req: AuthRequest, res: Response, next: NextFunction) {
     try{
-        const authHeader = req.headers['authorization'];
-        if (!authHeader || !authHeader.startsWith('Bearer ')) {
+        const rawAuthHeader = req.headers['authorization'] || req.headers['Authorization'];
+        const authHeader = Array.isArray(rawAuthHeader) ? rawAuthHeader[0] : rawAuthHeader;
+        if (!authHeader || typeof authHeader !== 'string' || !authHeader.startsWith('Bearer ')) {
             return res.status(401).json({ message: 'Authorization header missing or malformed' });
         }
-        const token = authHeader.slice("Bearer".length);
+        const token = authHeader.slice('Bearer '.length).trim();
         const secret = process.env['JWT_SECRET'] as string ;
         if (!secret) {
             return res.status(500).json({ message: 'JWT secret is missing' });

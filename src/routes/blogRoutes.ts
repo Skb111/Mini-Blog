@@ -72,7 +72,7 @@ router.get("/:id", getBlogById);
  *       500:
  *         description: Server error
  */
-router.post("/", requireAuth, upload.single("image"), createBlog);
+router.post("/CreateBlog", requireAuth, upload.single("image"), createBlog);
 
 /**
  * @openapi

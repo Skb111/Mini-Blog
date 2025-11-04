@@ -10,7 +10,8 @@ export async function createBlog(req: AuthRequest, res: Response): Promise<Respo
     if (!title || !content) {
       return res.status(400).json({ message: 'Missing fields' });
     }
-    const imageUrl = req.file ? `/uploads/${req.file.filename}` : undefined;
+    // const imageUrl = req.file ? `/uploads/${req.file.filename}` : undefined;
+    const imageUrl = req.file ? `${req.protocol}://${req.get("host")}/uploads/${req.file.filename}` : undefined;
     // console.log("Creating blog with image URL:", imageUrl);
     // console.log("File received:", req.file);
     // console.log("Body received:", req.body);

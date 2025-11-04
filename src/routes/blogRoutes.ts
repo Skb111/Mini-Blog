@@ -2,6 +2,7 @@ import { Router } from "express";
 import { createBlog, getAllBlogs, getBlogById, updateBlog } from "../controller/blogController";
 import requireAuth from "../middleware/authMiddleware";
 import upload from "../utils/uploader";
+import requireAdmin from "../middleware/requireAdmin";
 
 const router = Router();
 
@@ -15,7 +16,7 @@ const router = Router();
  *       200:
  *         description: A list of blog posts
  */
-router.get("/", getAllBlogs);
+router.get("/blogs", getAllBlogs);
 
 /**
  * @openapi
@@ -72,7 +73,7 @@ router.get("/:id", getBlogById);
  *       500:
  *         description: Server error
  */
-router.post("/CreateBlog", requireAuth, upload.single("image"), createBlog);
+router.post("/CreateBlog",requireAuth, requireAdmin, upload.single("image"), createBlog);
 
 /**
  * @openapi
@@ -115,6 +116,6 @@ router.post("/CreateBlog", requireAuth, upload.single("image"), createBlog);
  *       500:
  *         description: Server error
  */
-router.put("/:id", requireAuth, upload.single("image"), updateBlog);
+router.put("/:id", requireAuth, requireAdmin, upload.single("image"), updateBlog);
 
 export default router;
